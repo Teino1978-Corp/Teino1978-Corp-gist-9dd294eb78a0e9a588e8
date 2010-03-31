@@ -7,3 +7,21 @@ match x = tokenBase testTok
 
 advance = tokenBase testTok
           where testTok (p, t) = Just t
+
+--
+
+data Token = NameTok    String
+           | KeywordTok String
+           | StringTok  String
+           | NumberTok  Double
+           | OperTok    String
+           | DelimTok   Char deriving (Eq)
+
+instance Show Token where
+  show t = case t of
+             NameTok n    -> n
+             KeywordTok k -> k
+             StringTok s  -> "\"" ++ s ++ "\""
+             NumberTok n  -> show n
+             OperTok o    -> o
+             DelimTok d   -> [d]
